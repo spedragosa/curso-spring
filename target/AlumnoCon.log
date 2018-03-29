@@ -1,0 +1,2 @@
+2018-03-29 17:52:42 INFO  AnnotationConfigApplicationContext:583 - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1fe3ee3: startup date [Thu Mar 29 17:52:42 CEST 2018]; root of context hierarchy
+2018-03-29 17:52:43 INFO  AnnotationConfigApplicationContext:984 - Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@1fe3ee3: startup date [Thu Mar 29 17:52:42 CEST 2018]; root of context hierarchy
