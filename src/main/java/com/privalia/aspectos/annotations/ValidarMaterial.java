@@ -2,9 +2,10 @@ package com.privalia.aspectos.annotations;
 
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 /*
  * VAmos a capturar la ejecución del bean compra
@@ -12,24 +13,26 @@ import org.aspectj.lang.annotation.Before;
  * metodo compra() se compruebe la cantidad y despues de ejecue,
  */
 @Aspect
+@Component
 public class ValidarMaterial {
-	
-	@Around("execution( * com.privalia.aspectos.Comprar.compra(..) )")
-	
-	@Before("execution( * com.privalia.aspectos.Comprar.compra(..) )")
-	public void comprobarCantidad(){
+
+	@Pointcut("execution( * com.privalia.aspectos.annotations.Comprar.compra(..))")
+	public void pointCutMethod() {
+	}
+
+	@Before("pointCutMethod()")
+	public void comprobarCantidad() {
 		System.out.println("Se comprueba que es la cantidad correcta");
 	}
-	
-	@AfterReturning("execution( * com.privalia.aspectos.Comprar.compra(..) )")
-	public void empaquetar(){
-		System.out.println("Se comprueba que es la cantidad correcta");
+
+	@AfterReturning("pointCutMethod()")
+	public void empaquetar() {
+		System.out.println("Se empaqueta la mercancia");
 	}
-	
-	@AfterThrowing("execution( * com.privalia.aspectos.Comprar.compra(..) )")
-	public void ponerReclamacion(){
+
+	@AfterThrowing("pointCutMethod()")
+	public void ponerReclamacion() {
 		System.out.println("Se reclaman los defectos detectados");
 	}
 
 }
-

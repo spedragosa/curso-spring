@@ -1,33 +1,37 @@
 package com.privalia.aspectos.annotations;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import com.privalia.aspectos.ICompra;
 import com.privalia.entity.annotations.SpringConfiguration;
 
+@EnableAspectJAutoProxy
 public class Principal {
 
 	public static void main(String[] args) {
 
 		// Setter Injection
-		AbstractApplicationContext appContext = 
+		AnnotationConfigApplicationContext context = 
 				new AnnotationConfigApplicationContext(SpringConfiguration.class);
-		ICompra cp = (ICompra) appContext.getBean(Comprar.class);
+
+		context.scan("com.privalia.aspectos.annotations");
+	    //context.refresh();
+		
+		Comprar compra = (Comprar) context.getBean(Comprar.class);
 
 		try {
 			// Ejecución sin errores
 			System.out.println("Invocamos sin problemas");
-			cp.compra(false);
+			compra.compra(false);
 
 			// Provocamos el error
 			System.out.println("Invocamos para que se produzca un error");
-			cp.compra(true);
+			compra.compra(true);
 
 		} catch (Exception e) {
 			System.out.println("Obtenemos la excepción " + e);
 		}
 
-		appContext.close();
+		context.close();
 	}
 }

@@ -1,7 +1,10 @@
 package com.privalia.aspectos.annotations;
 
+import org.springframework.stereotype.Component;
+
 import com.privalia.aspectos.ICompra;
 
+@Component
 public class Comprar implements ICompra{
 
 	@Override
